@@ -27,7 +27,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('slug', function($slug) {
             //$question = Question::where('slug', $slug)->first();
             //return $question ? $question : abort(404);
-            return Question::where('slug', $slug)->first() ?? abort(404);
+            // return Question::where('slug', $slug)->first() ?? abort(404);
+            return Question::with('answers.user')->where('slug', $slug)->first() ?? abort(404);
         });
 
         parent::boot();
@@ -75,4 +76,6 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }
+
+
 }

@@ -9,8 +9,6 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class QuestionPolicy
 {
     use HandlesAuthorization;
-
-
     /**
      * Determine whether the user can update the question.
      *
@@ -20,9 +18,8 @@ class QuestionPolicy
      */
     public function update(User $user, Question $question)
     {
-        return $user->id == $question->user_id;
+        return $user->id === $question->user_id;
     }
-
     /**
      * Determine whether the user can delete the question.
      *
@@ -32,7 +29,7 @@ class QuestionPolicy
      */
     public function delete(User $user, Question $question)
     {
-        return $user->id == $question->user_id && $question->answers_count < 1;
+        return $user->id === $question->user_id && $question->answers_count < 1;
     }
 
 }
